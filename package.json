@@ -1,0 +1,23 @@
+{
+  "name": "gs-lit-app",
+  "version": "1.0.0",
+  "description": "Greek School literary apparatus dsl adapter",
+  "main": "lib/index.js",
+  "scripts": {
+    "tsc": "tsc",
+    "test": "jest"
+  },
+  "author": "Simone Zenzaro",
+  "license": "ISC",
+  "dependencies": {
+    "cophi-lang": "file:../cophi-lang",
+    "cross-fetch": "^3.1.5",
+    "pako": "^2.0.4",
+    "typescript": "^4.5.5"
+  },
+  "devDependencies": {
+    "@types/pako": "^1.0.3",
+    "jest": "^27.4.7",
+    "ts-jest": "^27.1.3"
+  }
+}
