@@ -4,7 +4,7 @@ import pako from 'pako';
 
 const host = 'http://localhost:8080'
 
-export class GsLiterary implements Language {
+export class GsLiteraryApp implements Language {
     id = new Promise<string>((resolve) => resolve('gs-lit-app'));
     version = new Promise<string>((resolve) => resolve('0.0.1'));
     name = new Promise<string>((resolve) => resolve('Literary apparatus'));
@@ -14,7 +14,9 @@ export class GsLiterary implements Language {
 
         const ss = pako.deflate(code).toString()
 
-        return fetch(`${host}/errors?code=${ss}`).then(response => response.json() as unknown as Error[])
+        return fetch(`${host}/errors?code=${ss}`)
+            .then(response => response.json() as unknown as Error[])
+            .catch(() => []);
     }
 
     suggestions(code: string, pos: Position): Promise<Suggestion[]> {
