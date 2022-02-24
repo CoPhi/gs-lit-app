@@ -2,7 +2,6 @@ import { Error, IMonarchLanguage, Language, Position, Suggestion } from "cophi-l
 import fetch from 'cross-fetch';
 import pako from 'pako';
 
-const host = 'http://localhost:8080'
 
 export class GsLiteraryApp implements Language {
     id = new Promise<string>((resolve) => resolve('gs-lit-app'));
@@ -10,11 +9,16 @@ export class GsLiteraryApp implements Language {
     name = new Promise<string>((resolve) => resolve('Literary apparatus'));
     capabilities = new Promise<string[]>((resolve) => resolve(['highlight', 'autocomplete']));
 
+    endpoint: string;
+
+    constructor(host:string, port:string) {
+        this.endpoint = `${host}:${port}`;
+    }
     errors(code: string): Promise<Error[]> {
 
         const ss = pako.deflate(code).toString()
 
-        return fetch(`${host}/errors?code=${ss}`)
+        return fetch(`${this.endpoint}/errors?code=${ss}`)
             .then(response => response.json() as unknown as Error[])
             .catch(() => []);
     }
